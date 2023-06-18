@@ -1,8 +1,7 @@
-﻿namespace Gathering.Application.Services.Authentication;
+﻿using Gathering.Domain.Entities;
+
+namespace Gathering.Application.Services.Authentication;
 
 public record AuthenticationResult(
-    Guid Id,
-    string FirstName,
-    string LastName,
-    string Email,
+    User User,
     string Token);

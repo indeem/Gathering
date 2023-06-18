@@ -1,6 +1,8 @@
-﻿namespace Gathering.Application.Common.Interfaces.Authentication;
+﻿using Gathering.Domain.Entities;
+
+namespace Gathering.Application.Common.Interfaces.Authentication;
 
 public interface IJwtTokenProvider
 {
-    string GenerateToken (Guid userId, string email);
+    string GenerateToken (User user);
 }

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Gathering.Application.Common.Interfaces.Authentication;
 using Gathering.Application.Common.Interfaces.Services;
+using Gathering.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -19,12 +20,13 @@ public class JwtTokenProvider : IJwtTokenProvider
         _jwtSettings = jwtSettings.Value;
     }
 
-    public string GenerateToken(Guid userId, string email)
+    public string GenerateToken(User user)
     {
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, email),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
+            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 

@@ -1,6 +1,8 @@
 ﻿using Gathering.Application.Common.Interfaces.Authentication;
+using Gathering.Application.Common.Interfaces.Persistence;
 using Gathering.Application.Common.Interfaces.Services;
 using Gathering.Infrastructure.Authentication;
+using Gathering.Infrastructure.Persistence;
 using Gathering.Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,8 @@ public static class DependencyInjection
           services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
           services.AddSingleton<IJwtTokenProvider, JwtTokenProvider>();
           services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+          
+          services.AddSingleton<IUserRepository, UserRepository>();
           
           return services;
      }
