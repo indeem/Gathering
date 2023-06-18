@@ -1,4 +1,4 @@
-﻿namespace Gathering.Domain.Authentication;
+﻿namespace Gathering.Contracts.Authentication;
 
 public record AuthenticationResponse(
     Guid Id,

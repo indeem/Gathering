@@ -1,3 +1,3 @@
-﻿namespace Gathering.Domain.Authentication;
+﻿namespace Gathering.Contracts.Authentication;
 
 public record LoginRequest(string Email, string Password);

@@ -1,5 +1,5 @@
 ﻿using Gathering.Application.Services.Authentication;
-using Gathering.Domain.Authentication;
+using Gathering.Contracts.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gathering.Api.Controllers;
