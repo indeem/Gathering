@@ -1,53 +1,62 @@
-﻿using Gathering.Application.Services.Authentication;
+﻿using Gathering.Application.Authentication.Commands.Register;
+using Gathering.Application.Authentication.Queries.Login;
+using Gathering.Application.Services.Authentication;
 using Gathering.Contracts.Authentication;
+using Gathering.Domain.Common.Errors;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gathering.Api.Controllers;
 
-[ApiController]
 [Route("api/auth")]
-public class AuthenticationController : ControllerBase
+public class AuthenticationController : ApiController
 {
-    private readonly IAuthenticationService _authenticationService;
+    private readonly IMediator _mediator;
 
-    public AuthenticationController(IAuthenticationService authenticationService)
+    public AuthenticationController(IMediator mediator)
     {
-        _authenticationService = authenticationService;
+        _mediator = mediator;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        var authResult = _authenticationService.Register(
-            request.FirstName, 
-            request.LastName, 
-            request.Email, 
+        var command = new RegisterCommand(request.FirstName,
+            request.LastName,
+            request.Email,
             request.Password);
-
-        var response = new AuthenticationResponse(
-            authResult.User.Id,
-            authResult.User.FirstName,
-            authResult.User.LastName,
-            authResult.User.Email,
-            authResult.Token);
         
-        return Ok(response);
+        var authResult = await _mediator.Send(command);
+        
+        if (authResult.IsError && authResult.FirstError == Errors.User.UserWithGivenEmailAlreadyExists)
+        {
+            return Problem(statusCode: StatusCodes.Status401Unauthorized, title: authResult.FirstError.Description);
+        }
+        
+        return authResult.Match(
+            success => Ok(Create(success)),
+            errors => Problem(errors));
     }
-    
+
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var authResult = _authenticationService.Login(
-            request.Email, 
-            request.Password);
+        var query = new LoginQuery(request.Email, request.Password);
         
-        var response = new AuthenticationResponse(
+        var authResult = await _mediator.Send(query);
+        
+        return authResult.Match(
+            success => Ok(Create(success)),
+            errors => Problem(errors));
+    }
+
+    private static AuthenticationResponse Create(AuthenticationResult authResult)
+    {
+        return new AuthenticationResponse(
             authResult.User.Id,
             authResult.User.FirstName,
             authResult.User.LastName,
             authResult.User.Email,
             authResult.Token);
-        
-        return Ok(response);
     }
 }
