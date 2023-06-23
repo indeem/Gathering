@@ -1,6 +1,6 @@
-using Gathering.Application.Services.Authentication;
 using MediatR;
 using ErrorOr;
+using Gathering.Application.Authentication.Common;
 
 namespace Gathering.Application.Authentication.Queries.Login;
 

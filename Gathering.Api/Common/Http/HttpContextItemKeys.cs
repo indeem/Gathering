@@ -1,4 +1,4 @@
-namespace Gathering.Api.Http;
+namespace Gathering.Api.Common.Http;
 
 public static class HttpContextItemKeys
 {

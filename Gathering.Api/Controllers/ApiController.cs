@@ -1,5 +1,5 @@
 using ErrorOr;
-using Gathering.Api.Http;
+using Gathering.Api.Common.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gathering.Api.Controllers;

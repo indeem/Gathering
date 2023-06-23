@@ -1,5 +1,5 @@
-using Gathering.Application.Services.Authentication;
 using ErrorOr;
+using Gathering.Application.Authentication.Common;
 using Gathering.Application.Common.Interfaces.Authentication;
 using Gathering.Application.Common.Interfaces.Persistence;
 using Gathering.Domain.Common.Errors;

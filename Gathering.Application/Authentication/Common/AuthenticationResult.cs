@@ -1,6 +1,6 @@
 ﻿using Gathering.Domain.Entities;
 
-namespace Gathering.Application.Services.Authentication;
+namespace Gathering.Application.Authentication.Common;
 
 public record AuthenticationResult(
     User User,

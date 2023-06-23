@@ -1,18 +1,15 @@
 using Gathering.Api;
+using Gathering.Api.Common.Errors;
 using Gathering.Application;
 using Gathering.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddApplication()
+    builder.Services
+        .AddPresentation()
+        .AddApplication()
         .AddInfrastructure(builder.Configuration);
-    
-    builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
-
-    builder.Services.AddSingleton<ProblemDetailsFactory, GatheringProblemDetailsFactory>();
 }
 
 

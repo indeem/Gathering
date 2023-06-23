@@ -1,12 +1,11 @@
 using System.Diagnostics;
-using ErrorOr;
-using Gathering.Api.Http;
+using Gathering.Api.Common.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 
-namespace Gathering.Api;
+namespace Gathering.Api.Common.Errors;
 
 internal sealed class GatheringProblemDetailsFactory : ProblemDetailsFactory
 {
