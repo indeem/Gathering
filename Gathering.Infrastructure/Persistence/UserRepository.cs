@@ -1,5 +1,5 @@
 using Gathering.Application.Common.Interfaces.Persistence;
-using Gathering.Domain.Entities;
+using Gathering.Domain.User;
 
 namespace Gathering.Infrastructure.Persistence;
 

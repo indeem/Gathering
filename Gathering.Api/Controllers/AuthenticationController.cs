@@ -4,11 +4,13 @@ using Gathering.Contracts.Authentication;
 using Gathering.Domain.Common.Errors;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gathering.Api.Controllers;
 
 [Route("api/auth")]
+[AllowAnonymous]
 public class AuthenticationController : ApiController
 {
     private readonly ISender _mediator;

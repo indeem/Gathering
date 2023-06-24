@@ -4,7 +4,7 @@ using Gathering.Application.Authentication.Common;
 using Gathering.Application.Common.Interfaces.Authentication;
 using Gathering.Application.Common.Interfaces.Persistence;
 using Gathering.Domain.Common.Errors;
-using Gathering.Domain.Entities;
+using Gathering.Domain.User;
 
 namespace Gathering.Application.Authentication.Queries.Login;
 

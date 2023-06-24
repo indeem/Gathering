@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Gathering.Application.Common.Interfaces.Authentication;
 using Gathering.Application.Common.Interfaces.Services;
-using Gathering.Domain.Entities;
+using Gathering.Domain.User;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 

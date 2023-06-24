@@ -1,4 +1,4 @@
-﻿using Gathering.Domain.Entities;
+﻿using Gathering.Domain.User;
 
 namespace Gathering.Application.Common.Interfaces.Authentication;
 

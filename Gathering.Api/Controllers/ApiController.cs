@@ -1,11 +1,14 @@
 using ErrorOr;
 using Gathering.Api.Common.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Gathering.Api.Controllers;
 
 [ApiController]
+[Authorize]
+[Route("api/[controller]/[action]")]
 public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
