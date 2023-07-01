@@ -5,8 +5,8 @@ namespace Gathering.Infrastructure.Persistence;
 
 public class UserRepository : IUserRepository
 {
-    private static List<User> _users = new();
-    
+    private static readonly List<User> _users = new();
+
     public User? GetByEmail(string email)
     {
         return _users.FirstOrDefault(u => u.Email == email);

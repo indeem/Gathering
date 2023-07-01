@@ -12,10 +12,10 @@ public class AuthenticationMappingConfig : IRegister
     {
         config.NewConfig<RegisterRequest, RegisterCommand>()
             .MapToConstructor(true);
-        
+
         config.NewConfig<LoginRequest, LoginQuery>()
             .MapToConstructor(true);
-        
+
         config.NewConfig<AuthenticationResult, AuthenticationResponse>()
             .Map(dest => dest, src => src.User)
             .MapToConstructor(true);

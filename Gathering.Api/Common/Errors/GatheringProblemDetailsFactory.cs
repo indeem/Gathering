@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using ErrorOr;
 using Gathering.Api.Common.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -9,8 +10,8 @@ namespace Gathering.Api.Common.Errors;
 
 internal sealed class GatheringProblemDetailsFactory : ProblemDetailsFactory
 {
-    private readonly ApiBehaviorOptions _options;
     private readonly Action<ProblemDetailsContext>? _configure;
+    private readonly ApiBehaviorOptions _options;
 
     public GatheringProblemDetailsFactory(
         IOptions<ApiBehaviorOptions> options,
@@ -36,7 +37,7 @@ internal sealed class GatheringProblemDetailsFactory : ProblemDetailsFactory
             Title = title,
             Type = type,
             Detail = detail,
-            Instance = instance,
+            Instance = instance
         };
 
         ApplyProblemDetailsDefaults(httpContext, problemDetails, statusCode.Value);
@@ -62,14 +63,12 @@ internal sealed class GatheringProblemDetailsFactory : ProblemDetailsFactory
             Status = statusCode,
             Type = type,
             Detail = detail,
-            Instance = instance,
+            Instance = instance
         };
 
         if (title != null)
-        {
             // For validation problem details, don't overwrite the default title with null.
             problemDetails.Title = title;
-        }
 
         ApplyProblemDetailsDefaults(httpContext, problemDetails, statusCode.Value);
 
@@ -87,16 +86,13 @@ internal sealed class GatheringProblemDetailsFactory : ProblemDetailsFactory
         }
 
         var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
-        if (traceId != null)
-        {
-            problemDetails.Extensions["traceId"] = traceId;
-        }
-        
-        var errors = httpContext?.Items[HttpContextItemKeys.Errors] as List<ErrorOr.Error>;
-        
+        if (traceId != null) problemDetails.Extensions["traceId"] = traceId;
+
+        var errors = httpContext?.Items[HttpContextItemKeys.Errors] as List<Error>;
+
         if (errors is not null)
             problemDetails.Extensions.Add("errorCodes", errors.Select(e => e.Code));
-        
-        _configure?.Invoke(new() { HttpContext = httpContext!, ProblemDetails = problemDetails });
+
+        _configure?.Invoke(new ProblemDetailsContext { HttpContext = httpContext!, ProblemDetails = problemDetails });
     }
 }

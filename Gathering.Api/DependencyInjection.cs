@@ -11,11 +11,11 @@ public static class DependencyInjection
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-        
+
         services.AddSingleton<ProblemDetailsFactory, GatheringProblemDetailsFactory>();
 
         services.AddMapping();
-        
+
         return services;
     }
 }

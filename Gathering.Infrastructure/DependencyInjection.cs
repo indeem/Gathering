@@ -2,6 +2,8 @@
 using Gathering.Application.Common.Interfaces.Authentication;
 using Gathering.Application.Common.Interfaces.Persistence;
 using Gathering.Application.Common.Interfaces.Services;
+using Gathering.Application.Generic;
+using Gathering.Domain.Test;
 using Gathering.Infrastructure.Authentication;
 using Gathering.Infrastructure.Persistence;
 using Gathering.Infrastructure.Services;
@@ -22,6 +24,8 @@ public static class DependencyInjection
 
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<IGenericRepository<Test>, TestRepository>();
+
 
         return services;
     }
@@ -34,7 +38,7 @@ public static class DependencyInjection
         services.AddSingleton(Options.Create(jwtSettings));
         services.AddSingleton<IJwtTokenProvider, JwtTokenProvider>();
 
-        services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters

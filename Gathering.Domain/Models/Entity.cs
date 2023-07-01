@@ -3,12 +3,12 @@ namespace Gathering.Domain.Models;
 public class Entity<TId> : IEquatable<Entity<TId>>
     where TId : notnull
 {
-    public TId Id { get; protected set; }
-    
     protected Entity(TId id)
     {
         Id = id;
     }
+
+    public TId Id { get; protected set; }
 
     public bool Equals(Entity<TId>? other)
     {
@@ -19,7 +19,7 @@ public class Entity<TId> : IEquatable<Entity<TId>>
     {
         return obj is Entity<TId> entity && Id.Equals(entity.Id);
     }
-    
+
     public static bool operator ==(Entity<TId>? left, Entity<TId>? right)
     {
         return Equals(left, right);
@@ -29,7 +29,7 @@ public class Entity<TId> : IEquatable<Entity<TId>>
     {
         return !Equals(left, right);
     }
-    
+
     public override int GetHashCode()
     {
         return Id.GetHashCode();

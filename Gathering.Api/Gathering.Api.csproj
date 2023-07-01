@@ -4,19 +4,19 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-      <UserSecretsId>76782760-f7d9-47f3-a88d-5a6f150495c8</UserSecretsId>
-  </PropertyGroup>
+        <UserSecretsId>76782760-f7d9-47f3-a88d-5a6f150495c8</UserSecretsId>
+    </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Gathering.Application\Gathering.Application.csproj" />
-      <ProjectReference Include="..\Gathering.Contracts\Gathering.Contracts.csproj" />
-      <ProjectReference Include="..\Gathering.Infrastructure\Gathering.Infrastructure.csproj" />
+        <ProjectReference Include="..\Gathering.Application\Gathering.Application.csproj"/>
+        <ProjectReference Include="..\Gathering.Contracts\Gathering.Contracts.csproj"/>
+        <ProjectReference Include="..\Gathering.Infrastructure\Gathering.Infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>

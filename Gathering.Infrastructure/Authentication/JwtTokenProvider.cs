@@ -35,12 +35,12 @@ public class JwtTokenProvider : IJwtTokenProvider
             SecurityAlgorithms.HmacSha256);
 
         var securityToken = new JwtSecurityToken(
-            issuer: _jwtSettings.Issuer,
-            audience: _jwtSettings.Audience,
+            _jwtSettings.Issuer,
+            _jwtSettings.Audience,
             expires: _dateTimeProvider.UtcNow.AddMinutes(_jwtSettings.ExpiryMinutes),
             claims: claims,
             signingCredentials: signingCredentials);
-        
+
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
     }
 }

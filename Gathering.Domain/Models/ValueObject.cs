@@ -2,6 +2,11 @@ namespace Gathering.Domain.Models;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
+    public bool Equals(ValueObject? other)
+    {
+        return Equals((object?)other);
+    }
+
     public abstract IEnumerable<object> GetEqualityComponents();
 
     public override bool Equals(object? obj)
@@ -13,7 +18,7 @@ public abstract class ValueObject : IEquatable<ValueObject>
 
         return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
     }
-    
+
     public static bool operator ==(ValueObject? left, ValueObject? right)
     {
         return Equals(left, right);
@@ -29,10 +34,5 @@ public abstract class ValueObject : IEquatable<ValueObject>
         return GetEqualityComponents()
             .Select(x => x?.GetHashCode() ?? 0)
             .Aggregate((x, y) => x ^ y);
-    }
-    
-    public bool Equals(ValueObject? other)
-    {
-        return Equals((object?)other);
     }
 }

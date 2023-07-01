@@ -21,10 +21,13 @@ var app = builder.Build();
     }
 
     app.UseExceptionHandler("/error");
-    
+
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
     app.Run();
 }
+
+
+//ToDo Generische Commands, queries, usw. erstellen um diese dann vom generischen Controller ausführen zu lassen

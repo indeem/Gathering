@@ -15,14 +15,11 @@ public class ApiController : ControllerBase
     {
         if (!errors.Any())
             return Problem();
-            
-        if (errors.All(error => error.Type == ErrorType.Validation))
-        {
-            return ValidationProblem(errors);
-        }
-        
+
+        if (errors.All(error => error.Type == ErrorType.Validation)) return ValidationProblem(errors);
+
         HttpContext.Items[HttpContextItemKeys.Errors] = errors;
-        
+
         return Problem(errors.First());
     }
 

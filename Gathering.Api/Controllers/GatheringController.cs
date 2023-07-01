@@ -1,12 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
+using Gathering.Application.Gathering.Queries;
+using Gathering.Application.Generic.Common;
+using Gathering.Contracts.Generic;
+using MapsterMapper;
+using MediatR;
 
 namespace Gathering.Api.Controllers;
 
-public class GatheringController : ApiController
+public class GatheringController : GenericApiController<GetGatheringQuery, GetResult, GetResponse>
 {
-    [HttpGet]
-    public async Task<IActionResult> Get()
+    public GatheringController(ISender mediator, IMapper mapper) : base(mediator, mapper)
     {
-        return Ok();
     }
 }
